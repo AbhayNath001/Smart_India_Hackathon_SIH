@@ -14,13 +14,13 @@ from sklearn.metrics import classification_report
 
 file_path = "image"
 name_class = os.listdir(file_path)
-#print(name_class)
+print(name_class)
 
 filepaths = list(glob.glob(file_path+'/**/*.*'))
-#print(filepaths)
+print(filepaths)
 
 labels = list(map(lambda x: os.path.split(os.path.split(x)[0])[1], filepaths))
-#print(labels)
+print(labels)
 
 filepath = pd.Series(filepaths, name='Filepath').astype(str)
 labels = pd.Series(labels, name='Label')
@@ -88,7 +88,7 @@ inputs = pretrained_model.input
 
 x = Dense(128, activation='relu')(pretrained_model.output)
 x = Dense(128, activation='relu')(x)
-outputs = Dense(2, activation='softmax')(x)
+outputs = Dense(40, activation='softmax')(x)             #Important!
 model = Model(inputs=inputs, outputs=outputs)
 model.compile(
     optimizer='adam',
@@ -104,7 +104,7 @@ my_callbacks = [EarlyStopping(monitor='val_accuracy',
 history = model.fit(
     train_gen,
     validation_data=valid_gen,
-    epochs=100
+    epochs=3
 )
 
 model.save("model_resnet.h5")
@@ -127,7 +127,7 @@ labels = (train_gen.class_indices)
 labels = dict((v,k) for k,v in labels.items())
 pred = [labels[k] for k in pred]
 y_test = list(test.Label)
-print(classification_report(y_test, pred))
+#print(classification_report(y_test, pred))
 
 #fig, axes = plt.subplots(nrows=5, ncols=2, figsize=(12,8),
 #                        subplot_kw={'xticks': [], 'yticks': []})
@@ -151,16 +151,18 @@ img = cv2.resize(img, (100,100))
 x = np.expand_dims(img, axis=0)
 x = preprocess_input(x)
 result = model.predict(x)
-print((result*100).astype('int'))
-plt.imshow(img)
+#print((result*100).astype('int'))
+#plt.imshow(img)
 
 p = list((result*100).astype('int'))
 pp = list(p[0])
-print(pp)
-print("Largest element is:", max(pp))
+#print(pp)
+#print("Largest element is:", max(pp))
 index = pp.index(max(pp))
-name_class = ['Aloevera', 'Tulsi']
-print(name_class[index])
+name_class = ['Aloevera', 'Tulsi', 'Ashwagandha', 'Amla', 'Amruta_Balli', 'Arali', 'Ashoka', 'Avacado', 'Bamboo', 'Basale', 'Betel', 'Betel_Nut', 'Brahmi', 'Castor', 'Curry_Leaf', 'Doddapatre', 'Ekka', 'Ganike', 'Gauva', 'Geranium', 'Henna', 'Hibiscus', 'Honge', 'Insulin', 'Jasmine', 'Lemon', 'Lemon_grass', 'Mango', 'Mint', 'Nagadali', 'Neem', 'Nithyapushpa', 'Nooni', 'Pappaya', 'Pepper', 'Pomegranate', 'Raktachandini', 'Rose', 'Sapota', 'Wood_sorel']
+#print(name_class[index])
+# Print the accuracy
+print(f"This is {name_class[index]} ({max(pp)}% Accuracy) ")
 
-plt.title(name_class[index])
-plt.imshow(img)
+#plt.title(name_class[index])
+#plt.imshow(img)
