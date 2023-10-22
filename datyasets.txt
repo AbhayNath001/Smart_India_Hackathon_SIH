@@ -1,7 +1,0 @@
-https://flavia.sourceforge.net/
-http://allisonthomure.com/LeafData.html
-https://www.imageclef.org/2016/lifeclef/plant
-https://data.mendeley.com/datasets/jd3cmnq6vp/1
-https://www.kaggle.com/c/plant-pathology-2021-fgvc8
-https://image-net.org/
-https://www.kaggle.com/datasets/aryashah2k/indian-medicinal-leaves-dataset
