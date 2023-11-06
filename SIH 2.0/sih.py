@@ -137,7 +137,7 @@ y_test = list(test.Label)
 #print(classification_report(y_test, pred)
 
 # Example usage of image prediction:
-image_path = 'demo1.jpg'  # Replace with the path to your image
+image_path = 'demo.jpg'  # Replace with the path to your image
 img = auto_resize(image_path, target_size=(100, 100))
 x = np.expand_dims(img, axis=0)
 x = preprocess_input(x)
